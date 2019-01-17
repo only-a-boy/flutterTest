@@ -6,11 +6,11 @@ import 'package:hello_world/widget/model/chartFlutterBean.dart';
 class ChartsPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new chartsPageState();
+    return new ChartsPageState();
   }
 }
 
-class chartsPageState extends State<ChartsPage> {
+class ChartsPageState extends State<ChartsPage> {
   bool animate;
   List<Widget> widgetList = List();
 
@@ -49,7 +49,7 @@ class chartsPageState extends State<ChartsPage> {
             expandedHeight: 150.0,
             flexibleSpace: new FlexibleSpaceBar(
               background: Image.asset(
-                'images/lonvn9.jpg',
+                'images/assessment.jpg',
                 fit: BoxFit.cover,
               ),
               centerTitle: false,

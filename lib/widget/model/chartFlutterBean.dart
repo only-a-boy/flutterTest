@@ -37,7 +37,6 @@ class LinearSaless {
 }
 
 class ChartFlutterBean {
-
   static List<charts.Series<TimeSeriesSales, DateTime>> createSampleData0() {
     final data = [
       new TimeSeriesSales(new DateTime(2017, 9, 19), 15),
@@ -77,8 +76,6 @@ class ChartFlutterBean {
 
     //点
   }
-
-
 
   /// Create one series with sample hard coded data.
   static List<charts.Series<LinearSaless, int>> createSampleData3() {
@@ -212,7 +209,7 @@ class ChartFlutterBean {
     ];
   }
 
-   List<charts.Series<OrdinalSales, String>>  getData() {
+  List<charts.Series<OrdinalSales, String>> getData() {
     final desktopSalesData = [
       new OrdinalSales('2014', 5),
       new OrdinalSales('2015', 25),
@@ -262,8 +259,8 @@ class ChartFlutterBean {
       ),
       new charts.Series<OrdinalSales, String>(
         id: 'Other',
-        insideLabelStyleAccessorFn:(T,int){
-          return charts.TextStyleSpec(color:charts.Color.transparent);
+        insideLabelStyleAccessorFn: (T, int) {
+          return charts.TextStyleSpec(color: charts.Color.transparent);
         },
         domainFn: (OrdinalSales sales, _) => sales.year,
         measureFn: (OrdinalSales sales, _) => sales.sales,
