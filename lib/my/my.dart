@@ -34,7 +34,7 @@ class _MyPageState extends State<MyPage> {
                         child: Column(
                           children: <Widget>[
                             Image.asset(
-                              'images/my_header.png',
+                              'assets/images/my_header.png',
                               width: 70.0,
                               height: 70.0,
                             ),
@@ -216,7 +216,7 @@ class _MyPageState extends State<MyPage> {
             width: MediaQuery.of(context).size.width,
             height: 150.0,
             child: Image.asset(
-              'images/my.jpg',
+              'assets/images/my.jpg',
               fit: BoxFit.cover,
             ),
           ),

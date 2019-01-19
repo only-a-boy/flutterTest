@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/plugin/list/titlePictureList.dart';
 
 class TabbedAppBarSample extends StatelessWidget {
   @override
@@ -47,9 +48,13 @@ class Choice {
 
 const List<Choice> choices = const <Choice>[
   const Choice(title: '推荐'),
+  const Choice(title: '热点'),
   const Choice(title: '课程'),
+  const Choice(title: '视频'),
   const Choice(title: '文章'),
-  const Choice(title: '作业'),
+  const Choice(title: '体育'),
+  const Choice(title: '财经'),
+  const Choice(title: '科技'),
 ];
 
 class ChoiceCard extends StatelessWidget {
@@ -61,6 +66,11 @@ class ChoiceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextStyle textStyle = Theme.of(context).textTheme.display1;
     print(choice.title);
+
+    if ('推荐' == choice.title) {
+      return new TitlePictureList();
+    }
+
     return new Card(
       color: Colors.white,
       child: new Center(

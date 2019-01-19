@@ -49,7 +49,7 @@ class ChartsPageState extends State<ChartsPage> {
             expandedHeight: 150.0,
             flexibleSpace: new FlexibleSpaceBar(
               background: Image.asset(
-                'images/assessment.jpg',
+                'assets/images/assessment.jpg',
                 fit: BoxFit.cover,
               ),
               centerTitle: false,
