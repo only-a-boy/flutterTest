@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/todo/todo.dart';
 
 class NoticePage extends StatefulWidget{
   @override
@@ -17,9 +18,7 @@ class _NoticePageState extends State<NoticePage> {
             new Container(),
           ],
         ),
-        body: new Center(
-          child: null,
-        ),
+        body: new TodoPage(),
       )
     );
   }

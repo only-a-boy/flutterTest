@@ -1,7 +1,7 @@
 /// Bar chart example
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-import 'package:hello_world/widget/model/chartFlutterBean.dart';
+import 'package:hello_world/plugin/model/chartFlutterBean.dart';
 
 class ChartsPage extends StatefulWidget {
   @override

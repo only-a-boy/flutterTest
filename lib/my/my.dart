@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/my/view/arc_banner_image.dart';
+import 'package:hello_world/logIn/loginPage.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -30,30 +31,35 @@ class _MyPageState extends State<MyPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        child: Column(
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/my_header.png',
-                              width: 70.0,
-                              height: 70.0,
-                            ),
-                            Container(
-                              margin: new EdgeInsets.only(top: 10.0),
-                              child: Dismissible(
-                                key: Key('a'),
-                                direction: DismissDirection.vertical,
-                                resizeDuration: Duration(milliseconds: 200),
-                                child: new Text(
-                                  '请点击登录',
-                                  style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold),
-                                  key: Key('a'),
-                                ),
+                      new GestureDetector(
+                        onTap: () {
+                          _login();
+                        },
+                        child: Container(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/my_header.png',
+                                width: 70.0,
+                                height: 70.0,
                               ),
-                            ),
-                          ],
+                              Container(
+                                margin: new EdgeInsets.only(top: 10.0),
+                                child: Dismissible(
+                                  key: Key('a'),
+                                  direction: DismissDirection.vertical,
+                                  resizeDuration: Duration(milliseconds: 200),
+                                  child: new Text(
+                                    '请点击登录',
+                                    style: TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold),
+                                    key: Key('a'),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
                         ),
                       ),
                     ],
@@ -362,4 +368,12 @@ class _MyPageState extends State<MyPage> {
       ),
     );
   }
+
+  void _login() {
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+      print(context);
+      return new MyLogin();
+    }));
+  }
+
 }

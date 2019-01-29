@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/plugin/list/titlePictureList.dart';
+import 'package:hello_world/widget/topBar/top_bar_data.dart';
+import 'package:hello_world/home/subPage/recommend.dart';
+import 'package:hello_world/http/http.dart';
+import 'package:hello_world/lessons/lessons.dart';
+import 'package:hello_world/component/component.dart';
 
-class TabbedAppBarSample extends StatelessWidget {
+class TopBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return new MaterialApp(
       theme: new ThemeData(
         primaryColor: Colors.blue,
@@ -15,7 +20,7 @@ class TabbedAppBarSample extends StatelessWidget {
             child: AppBar(
               bottom: new TabBar(
                 isScrollable: true,
-                tabs: choices.map((Choice choice) {
+                tabs: choices.map((TopBarData choice) {
                   return new Tab(
                     text: choice.title,
                     // icon: new Icon(choice.icon),
@@ -27,7 +32,7 @@ class TabbedAppBarSample extends StatelessWidget {
             preferredSize: Size.fromHeight(50.0)
           ),
           body: new TabBarView(
-            children: choices.map((Choice choice) {
+            children: choices.map((TopBarData choice) {
               return new Padding(
                 padding: const EdgeInsets.all(6.0),
                 child: new ChoiceCard(choice: choice),
@@ -40,35 +45,48 @@ class TabbedAppBarSample extends StatelessWidget {
   }
 }
 
-class Choice {
-  const Choice({ this.title, this.icon });
-  final String title;
-  final IconData icon;
-}
-
-const List<Choice> choices = const <Choice>[
-  const Choice(title: '推荐'),
-  const Choice(title: '热点'),
-  const Choice(title: '课程'),
-  const Choice(title: '视频'),
-  const Choice(title: '文章'),
-  const Choice(title: '体育'),
-  const Choice(title: '财经'),
-  const Choice(title: '科技'),
+const List<TopBarData> choices = const <TopBarData>[
+  const TopBarData(title: '推荐'),
+  const TopBarData(title: '线路'),
+  const TopBarData(title: '热门'),
+  const TopBarData(title: '课程'),
+  const TopBarData(title: '组件'),
+  const TopBarData(title: '视频'),
+  const TopBarData(title: '文章'),
+  const TopBarData(title: '体育'),
+  const TopBarData(title: '财经'),
+  const TopBarData(title: '科技'),
 ];
 
 class ChoiceCard extends StatelessWidget {
   const ChoiceCard({ Key key, this.choice }) : super(key: key);
 
-  final Choice choice;
-
+  final TopBarData choice;
   @override
   Widget build(BuildContext context) {
     final TextStyle textStyle = Theme.of(context).textTheme.display1;
     print(choice.title);
 
-    if ('推荐' == choice.title) {
-      return new TitlePictureList();
+    switch (choice.title) {
+      case '推荐':
+        return new TitlePictureList();
+        break;
+
+      case '线路':
+        return new MyHttp();
+        break;
+
+      case '热门':
+        return new MyHttp();
+        break;
+
+      case '课程':
+        return new LessonsPage();
+        break;
+
+      case '组件':
+        return new ComponentPage();
+        break;
     }
 
     return new Card(

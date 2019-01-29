@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/home/home.dart';
-import 'package:hello_world/knowledge/knowledge.dart';
+import 'package:hello_world/component/component.dart';
 import 'package:hello_world/notice/notice.dart';
 import 'package:hello_world/assessment/assessment.dart';
 import 'package:hello_world/my/my.dart';
 import 'navigation_icon_view.dart';
-import 'package:hello_world/plugin/top_bar_view.dart';
 
 class Index extends StatefulWidget {
 
@@ -33,7 +32,7 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
     //初始化导航图标
      _navigationIconViews = <NavigationIconView>[
       new NavigationIconView(icon: new Icon(Icons.home), title: new Text('首页'), vsync: this),
-      new NavigationIconView(icon: new Icon(Icons.g_translate), title: new Text('背单词'), vsync: this),
+      new NavigationIconView(icon: new Icon(Icons.gamepad), title: new Text('组件'), vsync: this),
       new NavigationIconView(icon: new Icon(Icons.add_alert), title: new Text('通知'), vsync: this),
       new NavigationIconView(icon: new Icon(Icons.assessment), title: new Text('统计'), vsync: this),
       new NavigationIconView(icon: new Icon(Icons.perm_identity), title: new Text('我的'), vsync: this),
@@ -44,10 +43,10 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
        view.controller.addListener(_rebuild);
      }
 
-      // 将我们 bottomBar 上面的按钮图标对应的页面存放起来，方便我们在点击的时候
+      // 将我们 bottomBar 上面的按钮图标对应的页面存放起来
       _pageList = <StatefulWidget>[
         new HomePage(),
-        new KnowledgePage(),
+        new ComponentPage(),
         new NoticePage(),
         new AssessmentPage(),
         new MyPage(),
