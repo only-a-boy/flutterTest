@@ -12,6 +12,7 @@ class _MySnackBarState extends State<MySnackBar> {
       bval = value;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _skey = new GlobalKey<ScaffoldState>();
@@ -21,18 +22,17 @@ class _MySnackBarState extends State<MySnackBar> {
         backgroundColor: Colors.blue,
       ));
     }
-    return new MaterialApp(
-        home: new Scaffold(
-          key: _skey,
-          body: new Center(
-            child: new RaisedButton(
-              onPressed: () {getValue();},
-              child: new Text('显示消息'),
-            ),
-          ),
 
-        )
+    return new Scaffold(
+      key: _skey,
+      body: new Center(
+        child: new RaisedButton(
+          onPressed: () {
+            getValue();
+          },
+          child: new Text('显示消息'),
+        ),
+      ),
     );
   }
 }
-

@@ -1,93 +1,116 @@
-import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:hello_world/http/route.dart';
-import 'package:hello_world/widget/picker/cityPicker.dart';
 
-class MyHttp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new MyHomePage(),
-    );
+class ParsedResponse<T> {
+  ParsedResponse(this.statusCode, this.body);
+
+  final int statusCode;
+  final T body;
+
+  bool isOk() {
+    return statusCode >= 200 && statusCode < 300;
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+final int NO_INTERNET = 404;
 
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
-}
+class HttpApi {
+  static Future<dynamic> post(String partUrl, String urlType, Map<String, Object> data, [Map<String, String> headers]) async {
 
-class _MyHomePageState extends State<MyHomePage> {
-  var _lineName = '未知线路';
+    String url = '';
 
-  String result;
+    if (headers == null) {
+      headers = {
+        'Content-Type': 'application/json'
+      };
+    }
 
-  _getLineList() async {
+    if (urlType == 'PIS') {
+      url = PIS_ROUTE + partUrl;
 
-    Map<String, String> headers = {
-      'Content-Type': 'application/json'
-    };
+      data = {
+        'ocCode': PIS_OC_CODE,
+      };
+    } else if (urlType == 'UCS') {
+      url = UCS_ROUTE + partUrl;
+    }
 
-    String url = PIS_ROUTE + 'getLineList';
-
-    var param = {
-      'ocCode': PIS_OC_CODE,
-    };
-
-    http.post(url, headers: headers, body: json.encode(param), encoding: Utf8Codec())
+    return await http.post(url, headers: headers, body: json.encode(data), encoding: Utf8Codec())
       .then((http.Response response) {
-        var responseData = json.decode(response.body);
 
-        var data = [
-          {
-            'lineId': '00001',
-            'name': '测试一号线',
-          },
-          {
-            'lineId': 'A00002',
-            'name': '测试二号线'
-          },
-        ];
+        if (response == null) {
+          return new ParsedResponse(NO_INTERNET, {});
+        }
 
-        setState(() {
-          result = responseData['ajaxResult']['data'][0]['name'];
-          _lineName = result;
-        });
+        if (response.statusCode < 200 || response.statusCode >= 300) {
+          return new ParsedResponse(response.statusCode, {});
+        }
+
+        var result = json.decode(response.body);
+
+        print(result);
+
+        return new ParsedResponse(response.statusCode, result);
         
     }).catchError((error) {
       print('$error错误');
     });
-
-    if (!mounted) return;
   }
 
-  @override
-  Widget build(BuildContext context) {
+  static Future<dynamic> get(String partUrl, String urlType, Map<String, dynamic> data, [Map<String, String> headers]) async {
 
-    print('$_lineName');
-    var spacer = new SizedBox(height: 32.0);
+    String url = partUrl;
 
-    return new Scaffold(
-      body: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Text('您的线路是:'),
-            new Text('$_lineName'),
-            spacer,
-            new RaisedButton(
-              onPressed: _getLineList,
-              child: new Text('获取线路'),
-            ),
-          ],
-        ),
-      ),
-    );
+    if (headers != null) {
+      headers = {
+        'Content-Type': 'application/json'
+      };
+    }
+
+    if (data.length > 0) {
+      partUrl += '?';
+
+      data.forEach((key, value) => partUrl += '$key=$value&');
+
+      partUrl = partUrl.substring(0, partUrl.length - 1);
+    }
+
+    if (urlType == 'PIS') {
+      url = PIS_ROUTE + partUrl;
+      data = {
+        'ocCode': PIS_OC_CODE,
+      };
+    } else if (urlType == 'UCS') {
+      url = UCS_ROUTE + partUrl;
+    } else if (urlType == 'MOVIE') {
+      url = MOVIE_ROUTE + partUrl;
+    }
+
+    print(url);
+    
+    return await http.get(url, headers: headers)
+      .then((http.Response response) {
+
+        if (response == null) {
+          return new ParsedResponse(NO_INTERNET, {});
+        }
+
+        if (response.statusCode < 200 || response.statusCode >= 300) {
+          return new ParsedResponse(response.statusCode, {});
+        }
+
+        var result = json.decode(response.body);
+
+        return new ParsedResponse(response.statusCode, result);
+        
+    }).catchError((error) {
+      print('$error错误');
+    });
   }
 }
+
+
 
 // http.get(url).then((http.Response response) {
       //   final Map<String, dynamic> responseData = json.decode(response.body);

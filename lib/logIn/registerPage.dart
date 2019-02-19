@@ -26,7 +26,6 @@ class RegistPagerState extends State<RegistPager>
   @override
   Widget build(BuildContext context) {
     final height_screen = MediaQuery.of(context).size.height;
-    final width_srcreen = MediaQuery.of(context).size.width;
     return Scaffold(
       body: GestureDetector(
         onTap: () {

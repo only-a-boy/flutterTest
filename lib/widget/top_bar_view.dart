@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/widget/topBar/top_bar_data.dart';
 import 'package:hello_world/home/subPage/recommend.dart';
-import 'package:hello_world/http/http.dart';
+import 'package:hello_world/http/httpPage.dart';
 import 'package:hello_world/lessons/lessons.dart';
-import 'package:hello_world/component/component.dart';
+import 'package:hello_world/home/subPage/movie.dart';
 
 class TopBarView extends StatelessWidget {
   @override
@@ -50,7 +50,7 @@ const List<TopBarData> choices = const <TopBarData>[
   const TopBarData(title: '线路'),
   const TopBarData(title: '热门'),
   const TopBarData(title: '课程'),
-  const TopBarData(title: '组件'),
+  const TopBarData(title: '电影'),
   const TopBarData(title: '视频'),
   const TopBarData(title: '文章'),
   const TopBarData(title: '体育'),
@@ -84,8 +84,8 @@ class ChoiceCard extends StatelessWidget {
         return new LessonsPage();
         break;
 
-      case '组件':
-        return new ComponentPage();
+      case '电影':
+        return new MoviePage();
         break;
     }
 

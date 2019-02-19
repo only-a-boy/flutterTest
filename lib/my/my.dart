@@ -30,39 +30,7 @@ class _MyPageState extends State<MyPage> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      new GestureDetector(
-                        onTap: () {
-                          _login();
-                        },
-                        child: Container(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/my_header.png',
-                                width: 70.0,
-                                height: 70.0,
-                              ),
-                              Container(
-                                margin: new EdgeInsets.only(top: 10.0),
-                                child: Dismissible(
-                                  key: Key('a'),
-                                  direction: DismissDirection.vertical,
-                                  resizeDuration: Duration(milliseconds: 200),
-                                  child: new Text(
-                                    '请点击登录',
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold),
-                                    key: Key('a'),
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
-                        ),
-                      ),
-                    ],
+                    children: [new MyInfo()],
                   ),
                 ),
               ],
@@ -268,7 +236,9 @@ class _MyPageState extends State<MyPage> {
                     ),
                     Container(
                       margin: new EdgeInsets.only(top: 5.0),
-                      child: Text('写作业', style: TextStyle(fontSize: 13.0),
+                      child: Text(
+                        '写作业',
+                        style: TextStyle(fontSize: 13.0),
                       ),
                     ),
                   ],
@@ -330,7 +300,9 @@ class _MyPageState extends State<MyPage> {
                     ),
                     Container(
                       margin: new EdgeInsets.only(top: 5.0),
-                      child: Text('我的文章', style: TextStyle(fontSize: 13.0),
+                      child: Text(
+                        '我的文章',
+                        style: TextStyle(fontSize: 13.0),
                       ),
                     ),
                   ],
@@ -368,12 +340,53 @@ class _MyPageState extends State<MyPage> {
       ),
     );
   }
+}
+
+class MyInfo extends StatefulWidget {
+  @override
+  _MyInfoState createState() => new _MyInfoState();
+}
+
+class _MyInfoState extends State<MyInfo> {
+  String name = '请点击登录';
 
   void _login() {
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+    Navigator.of(context)
+        .push<String>(new MaterialPageRoute(builder: (context) {
       print(context);
       return new MyLogin();
-    }));
+    })).then((String result) => name = result);
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return new GestureDetector(
+      onTap: () {
+        _login();
+      },
+      child: Container(
+          child: Column(
+        children: <Widget>[
+          Image.asset(
+            'assets/images/my_header.png',
+            width: 70.0,
+            height: 70.0,
+          ),
+          Container(
+            margin: new EdgeInsets.only(top: 10.0),
+            child: Dismissible(
+              key: Key('a'),
+              direction: DismissDirection.vertical,
+              resizeDuration: Duration(milliseconds: 200),
+              child: new Text(
+                '$name',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                key: Key('a'),
+              ),
+            ),
+          )
+        ],
+      )),
+    );
+  }
 }
