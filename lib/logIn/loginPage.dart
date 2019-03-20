@@ -54,7 +54,7 @@ class MyLoginState extends State<MyLogin> with TickerProviderStateMixin {
                         new SizedBox(
                           height: 30.0,
                         ),
-                        new TextField(
+                        TextField(
                           onChanged: (phone) => _userPhone = phone,
                           decoration: new InputDecoration(
                             hintText: '请输入您的用户名',
@@ -64,12 +64,13 @@ class MyLoginState extends State<MyLogin> with TickerProviderStateMixin {
                         new SizedBox(
                           height: 10.0,
                         ),
-                        new TextField(
+                        TextField(
                           onChanged: (world) => _passWold = world,
                           decoration: new InputDecoration(
                             hintText: '请输入您的密码',
                             labelText: "密码",
                           ),
+                          obscureText: true,
                         ),
                         new SizedBox(
                           height: 50.0,

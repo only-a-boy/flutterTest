@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/widget/topBar/top_bar_data.dart';
-import 'package:hello_world/component/components/custom.dart';
+import 'package:hello_world/component/components/layout/row.dart';
+import 'package:hello_world/component/components/layout/column.dart';
+import 'package:hello_world/component/components/layout/flex.dart';
+import 'package:hello_world/component/components/layout/wrap.dart';
+import 'package:hello_world/component/components/layout/stack.dart';
 import 'package:hello_world/component/components/radio.dart';
 import 'package:hello_world/component/components/checkbox.dart';
 import 'package:hello_world/component/components/snackBar.dart';
@@ -49,6 +53,11 @@ class TopBarView extends StatelessWidget {
 }
 
 const List<TopBarData> choices = const <TopBarData>[
+  const TopBarData(title: '横向布局'),
+  const TopBarData(title: '纵向布局'),
+  const TopBarData(title: '弹性布局'),
+  const TopBarData(title: '流式布局'),
+  const TopBarData(title: '层叠布局'),
   const TopBarData(title: '单选按钮'),
   const TopBarData(title: '多选按钮'),
   const TopBarData(title: '切换按钮'),
@@ -68,6 +77,26 @@ class ChoiceCard extends StatelessWidget {
     print(choice.title);
 
     switch (choice.title) {
+      case '横向布局':
+        return new MyRow();
+        break;
+
+      case '纵向布局':
+        return new MyColumn();
+        break;
+
+      case '弹性布局':
+        return new MyFlex();
+        break;
+
+      case '流式布局':
+        return new MyWrap();
+        break;
+
+      case '层叠布局':
+        return new MyStack();
+        break;
+
       case '单选按钮':
         return new MyRadio();
         break;

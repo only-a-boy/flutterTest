@@ -21,7 +21,6 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
   //定义一个空的设置状态值的方法
   void _rebuild() {
     setState(() {
-          
         });
   }
 

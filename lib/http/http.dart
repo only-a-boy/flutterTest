@@ -29,9 +29,11 @@ class HttpApi {
     if (urlType == 'PIS') {
       url = PIS_ROUTE + partUrl;
 
-      data = {
-        'ocCode': PIS_OC_CODE,
-      };
+      if (data == null) {
+        data = {
+          'ocCode': PIS_OC_CODE,
+        };
+      }
     } else if (urlType == 'UCS') {
       url = UCS_ROUTE + partUrl;
     }
@@ -52,7 +54,6 @@ class HttpApi {
         print(result);
 
         return new ParsedResponse(response.statusCode, result);
-        
     }).catchError((error) {
       print('$error错误');
     });
@@ -78,9 +79,6 @@ class HttpApi {
 
     if (urlType == 'PIS') {
       url = PIS_ROUTE + partUrl;
-      data = {
-        'ocCode': PIS_OC_CODE,
-      };
     } else if (urlType == 'UCS') {
       url = UCS_ROUTE + partUrl;
     } else if (urlType == 'MOVIE') {
